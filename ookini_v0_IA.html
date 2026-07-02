@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ookini | Café de Especialidad</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Cinzel Decorative for headers and Plus Jakarta Sans for body -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            50: '#fdfbf2',
+                            100: '#fbf4db',
+                            200: '#f5e4ab',
+                            300: '#edd175',
+                            400: '#e1b742',
+                            500: '#d4af37', // Gold base
+                            600: '#b28e28',
+                            700: '#8e6c1e',
+                            800: '#6f521a',
+                            900: '#503b17'
+                        },
+                        obsidian: {
+                            50: '#f4f4f5',
+                            900: '#0f0f11',
+                            950: '#060608' // Deep rich black
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar matching dark gold style */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #060608;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #b28e28;
+        }
+        
+        /* Shimmer effect for premium buttons */
+        .gold-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .gold-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255, 255, 255, 0) 0%,
+                rgba(255, 255, 255, 0.1) 50%,
+                rgba(255, 255, 255, 0) 100%
+            );
+            transform: rotate(45deg);
+            transition: transform 0.5s ease;
+        }
+        .gold-shimmer:hover::after {
+            transform: translate(50%, 50%) rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-obsidian-950 text-stone-200 font-sans selection:bg-gold-500 selection:text-obsidian-950 min-h-screen flex flex-col justify-between">
+
+    <!-- NAVIGATION HEADER -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-obsidian-950/90 backdrop-blur-md border-b border-gold-500/10 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <a href="#" class="flex flex-col items-start group">
+                <span class="font-serif text-2xl tracking-[0.25em] text-gold-500 font-bold transition-colors group-hover:text-gold-300">OOKINI</span>
+                <span class="text-[9px] tracking-[0.4em] text-stone-400 uppercase font-light">Café de Especialidad</span>
+            </a>
+            
+            <nav class="hidden md:flex items-center space-x-10 text-xs tracking-widest uppercase font-medium">
+                <a href="#experiencias" class="text-stone-300 hover:text-gold-500 transition-colors">Preparaciones</a>
+                <a href="#origen" class="text-stone-300 hover:text-gold-500 transition-colors">Nuestro Origen</a>
+                <a href="#reservas" class="px-5 py-2.5 bg-gold-500 text-obsidian-950 font-semibold rounded hover:bg-gold-400 transition-all duration-300 tracking-wider gold-shimmer">
+                    Reservar Ritual
+                </a>
+            </nav>
+
+            <!-- Mobile Navigation Toggle -->
+            <button id="mobile-menu-btn" class="md:hidden text-gold-500 focus:outline-none" aria-label="Abrir Menú">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path id="menu-icon-path" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-obsidian-900 border-b border-gold-500/20 px-6 py-6 space-y-4">
+            <a href="#experiencias" class="block text-stone-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-wider py-2">Preparaciones</a>
+            <a href="#origen" class="block text-stone-300 hover:text-gold-500 transition-colors text-sm uppercase tracking-wider py-2">Nuestro Origen</a>
+            <a href="#reservas" class="block text-center px-5 py-3 bg-gold-500 text-obsidian-950 font-bold rounded hover:bg-gold-400 transition-colors text-sm uppercase tracking-wider">
+                Reservar Ritual
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative min-h-screen flex items-center justify-center bg-cover bg-center overflow-hidden" style="background-image: linear-gradient(rgba(6, 6, 8, 0.8), rgba(6, 6, 8, 0.95)), url('https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=1600');">
+        <!-- Floating Japanese Text Background for Atmosphere -->
+        <div class="absolute inset-y-0 right-10 flex items-center opacity-5 select-none pointer-events-none hidden lg:flex">
+            <span class="font-serif text-[12rem] text-gold-500 leading-none [writing-mode:vertical-rl]">おおきに</span>
+        </div>
+
+        <div class="max-w-4xl mx-auto px-6 text-center z-10 pt-20">
+            <div class="inline-block border border-gold-500/30 px-4 py-1.5 rounded-full text-gold-400 text-xs tracking-widest uppercase mb-6 font-light">
+                Exclusividad de Culto &middot; Solo 50 tazas al día
+            </div>
+            <h1 class="font-serif text-4xl sm:text-6xl md:text-7xl font-bold tracking-wide text-white mb-6 leading-tight">
+                El ritual de la <span class="text-gold-500">extracción lenta</span>.
+            </h1>
+            <p class="text-stone-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Sin distracciones culinarias. Sin pastelería. En Ookini veneramos el grano puro a través de métodos artesanales precisos bajo reserva anticipada.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#experiencias" class="w-full sm:w-auto px-8 py-4 bg-transparent border border-gold-500/40 text-gold-400 font-medium tracking-widest rounded hover:bg-gold-500 hover:text-obsidian-950 hover:border-gold-500 transition-all duration-300 text-sm uppercase">
+                    Ver Métodos
+                </a>
+                <a href="#reservas" class="w-full sm:w-auto px-8 py-4 bg-gold-500 text-obsidian-950 font-bold tracking-widest rounded hover:bg-gold-400 transition-all duration-300 text-sm uppercase gold-shimmer">
+                    Reservar Taza
+                </a>
+            </div>
+        </div>
+        
+        <!-- Bottom overlay gradient -->
+        <div class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-obsidian-950 to-transparent"></div>
+    </section>
+
+    <!-- EXPERIENCIAS / MÉTODOS SECTION -->
+    <section id="experiencias" class="py-24 bg-obsidian-950 border-t border-gold-500/5">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 text-xs tracking-widest uppercase font-bold">Carta de Métodos</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mt-2 mb-4 tracking-wide">El Arte en Taza</h2>
+                <div class="h-[1px] w-12 bg-gold-500 mx-auto mb-4"></div>
+                <p class="text-stone-400 font-light">Disponemos de preparaciones complejas de extracción lenta que requieren reserva previa para garantizar la perfección de la temperatura, molienda y flujo.</p>
+            </div>
+
+            <!-- Grid of Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
+                <!-- V60 -->
+                <div class="group bg-obsidian-900 border border-gold-500/10 rounded-xl overflow-hidden hover:border-gold-500/40 transition-all duration-500 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-obsidian-950/20 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=1000" alt="V60 Drip" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <span class="absolute top-4 right-4 z-20 px-3 py-1 bg-gold-500 text-obsidian-950 font-bold text-xs rounded uppercase tracking-wider shadow-lg">$5.00</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold-400 transition-colors">V60</h3>
+                                <span class="text-[10px] bg-gold-500/10 text-gold-400 border border-gold-500/20 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Reserva</span>
+                            </div>
+                            <p class="text-stone-400 text-sm font-light leading-relaxed">
+                                Filtrado de flujo constante a través de cono estriado. Ofrece una taza de cuerpo sedoso, acidez brillante y claridad de notas frutales insuperable.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="#reservas" onclick="setReservaRapida('metodo', 'V60')" class="block text-center py-2.5 bg-transparent border border-gold-500/20 text-gold-500 hover:bg-gold-500 hover:text-obsidian-950 hover:border-gold-500 rounded transition-all duration-300 text-xs uppercase tracking-wider font-bold">
+                            Reservar V60
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Kyoto Drip -->
+                <div class="group bg-obsidian-900 border border-gold-500/10 rounded-xl overflow-hidden hover:border-gold-500/40 transition-all duration-500 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-obsidian-950/20 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1498804103079-a6351b050096?q=80&w=1000" alt="Kyoto Drip Tower" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <span class="absolute top-4 right-4 z-20 px-3 py-1 bg-gold-500 text-obsidian-950 font-bold text-xs rounded uppercase tracking-wider shadow-lg">$7.00</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold-400 transition-colors">Kyoto Drip</h3>
+                                <span class="text-[10px] bg-gold-500/10 text-gold-400 border border-gold-500/20 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Reserva</span>
+                            </div>
+                            <p class="text-stone-400 text-sm font-light leading-relaxed">
+                                Extracción gota a gota con agua helada durante 8 horas. Un proceso hipnotizante que resulta en una textura densa, licorosa y de acidez sumamente baja.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="#reservas" onclick="setReservaRapida('metodo', 'Kyoto')" class="block text-center py-2.5 bg-transparent border border-gold-500/20 text-gold-500 hover:bg-gold-500 hover:text-obsidian-950 hover:border-gold-500 rounded transition-all duration-300 text-xs uppercase tracking-wider font-bold">
+                            Reservar Kyoto
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Siphon -->
+                <div class="group bg-obsidian-900 border border-gold-500/10 rounded-xl overflow-hidden hover:border-gold-500/40 transition-all duration-500 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-obsidian-950/20 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1507133750040-4a8f57021571?q=80&w=1000" alt="Siphon Brewer" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                            <span class="absolute top-4 right-4 z-20 px-3 py-1 bg-gold-500 text-obsidian-950 font-bold text-xs rounded uppercase tracking-wider shadow-lg">$8.00</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-serif text-xl font-bold text-white group-hover:text-gold-400 transition-colors">Siphon</h3>
+                                <span class="text-[10px] bg-gold-500/10 text-gold-400 border border-gold-500/20 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Reserva</span>
+                            </div>
+                            <p class="text-stone-400 text-sm font-light leading-relaxed">
+                                El sifón de vacío japonés combina la inmersión total con la fuerza de la presión de vapor. Entrega un café intensamente aromático, limpio e impecable.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <a href="#reservas" onclick="setReservaRapida('metodo', 'Siphon')" class="block text-center py-2.5 bg-transparent border border-gold-500/20 text-gold-500 hover:bg-gold-500 hover:text-obsidian-950 hover:border-gold-500 rounded transition-all duration-300 text-xs uppercase tracking-wider font-bold">
+                            Reservar Siphon
+                        </a>
+                    </div>
+                </div>
+
+                <!-- French Press (Walk-In) -->
+                <div class="group bg-obsidian-900 border border-stone-800 rounded-xl overflow-hidden hover:border-stone-600 transition-all duration-500 flex flex-col justify-between">
+                    <div>
+                        <div class="relative h-56 overflow-hidden">
+                            <div class="absolute inset-0 bg-obsidian-950/40 z-10"></div>
+                            <img src="https://images.unsplash.com/photo-1513530176992-0cf39c4cbed4?q=80&w=1000" alt="French Press" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            <span class="absolute top-4 right-4 z-20 px-3 py-1 bg-stone-700 text-white font-bold text-xs rounded uppercase tracking-wider shadow-lg">$3.00</span>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="font-serif text-xl font-bold text-stone-300">Prensa Francesa</h3>
+                                <span class="text-[10px] bg-stone-800 text-stone-400 border border-stone-700 px-2 py-0.5 rounded uppercase tracking-wider font-semibold">Walk-in</span>
+                            </div>
+                            <p class="text-stone-400 text-sm font-light leading-relaxed">
+                                Preparación por inmersión de paso clásico. Sin prisas ni reservas necesarias. Textura oleosa, terrosa y de gran robustez ideal para cualquier hora.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0">
+                        <button disabled class="w-full py-2.5 bg-stone-800/50 text-stone-500 border border-transparent rounded cursor-not-allowed text-xs uppercase tracking-wider font-bold">
+                            No requiere reserva
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CATA SEMANAL BANNER -->
+            <div class="relative rounded-2xl bg-gradient-to-r from-gold-950 via-obsidian-900 to-obsidian-900 border border-gold-500/20 p-8 md:p-12 overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-8">
+                <div class="absolute right-0 top-0 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="relative z-10 max-w-2xl">
+                    <span class="px-3 py-1 bg-gold-500/10 text-gold-400 border border-gold-500/30 text-xs rounded-full uppercase tracking-widest font-semibold mb-4 inline-block">Evento Semanal Premium</span>
+                    <h3 class="font-serif text-2xl sm:text-4xl font-bold text-white mb-4">Cata Sensorial Guiada</h3>
+                    <p class="text-stone-300 text-sm sm:text-base font-light leading-relaxed mb-4">
+                        Una experiencia interactiva y exclusiva de 90 minutos para analizar y degustar 4 variedades de orígenes y procesos exóticos. Guiada personalmente por nuestro barista principal.
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-xs tracking-wider uppercase font-semibold text-gold-400">
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 005.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            Limitado a 8 Cupos
+                        </span>
+                        <span class="flex items-center gap-1.5">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            $25.00 USD p/p
+                        </span>
+                        <span class="flex items-center gap-1.5 text-stone-400 font-light italic normal-case" id="cata-disponibilidad-info">
+                            Cargando disponibilidad...
+                        </span>
+                    </div>
+                </div>
+                <div class="relative z-10 w-full lg:w-auto shrink-0">
+                    <a href="#reservas" onclick="setReservaRapida('cata')" class="w-full lg:w-auto inline-block text-center px-8 py-4 bg-gold-500 text-obsidian-950 font-bold tracking-widest rounded hover:bg-gold-400 transition-all duration-300 text-sm uppercase shadow-lg gold-shimmer">
+                        Asegurar Cupo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ORIGEN / HISTORIA SECTION -->
+    <section id="origen" class="py-24 bg-obsidian-900 border-t border-gold-500/5 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <!-- Columna Texto -->
+                <div class="lg:col-span-7 space-y-6">
+                    <span class="text-gold-500 text-xs tracking-widest uppercase font-bold">Nuestra Filosofía</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white tracking-wide text-left">El Origen de Ookini</h2>
+                    <div class="h-[1px] w-12 bg-gold-500"></div>
+                    <p class="text-stone-300 font-light text-base leading-relaxed">
+                        En el dialecto tradicional de Kansai, Osaka, <strong>"Ookini" (おおきに)</strong> significa mucho más que un simple "gracias". Se trata de una expresión sincera de agradecimiento profundo, respeto mutuo y gratitud por la conexión genuina establecida entre dos personas en un instante dado.
+                    </p>
+                    <p class="text-stone-400 font-light text-sm sm:text-base leading-relaxed">
+                        Nuestra cafetería es una manifestación de esa reverencia hacia el cliente y la tierra. Hemos decidido voluntariamente eliminar cualquier elemento distractor del menú: <strong>no servimos pastelería, no hay bollería ni masas</strong>. La experiencia se enfoca rigurosamente en la devoción al grano de especialidad, el agua óptima y el dominio técnico de los baristas.
+                    </p>
+                    <p class="text-stone-400 font-light text-sm sm:text-base leading-relaxed">
+                        Limitamos nuestra producción deliberadamente a <strong>50 tazas especiales al día</strong>. Creemos que la exclusividad resguarda la excelencia y nos asegura que cada taza es un ritual perfecto.
+                    </p>
+                </div>
+                <!-- Columna Imagen -->
+                <div class="lg:col-span-5 relative h-[350px] sm:h-[450px] rounded-2xl overflow-hidden border border-gold-500/20 group shadow-2xl">
+                    <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-transparent to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=1000" alt="Specialty Coffee Pour" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                    <div class="absolute bottom-6 left-6 z-20">
+                        <p class="font-serif text-2xl font-bold text-white">Pureza Absoluta</p>
+                        <p class="text-gold-400 text-xs tracking-widest uppercase mt-1">Sin añadidos. Sin atajos.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- RESERVAS SECTION -->
+    <section id="reservas" class="py-24 bg-obsidian-950 border-t border-gold-500/5 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-gold-500 text-xs tracking-widest uppercase font-bold">Reserva de Experiencias</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-white mt-2 mb-4 tracking-wide">Asegura tu Taza</h2>
+                <div class="h-[1px] w-12 bg-gold-500 mx-auto mb-4"></div>
+                <p class="text-stone-400 font-light">Nuestro motor interactivo de reserva gestiona el cupo diario de 50 tazas y el cupo semanal de nuestra cata en tiempo real.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                
+                <!-- Columna Izquierda: Indicadores en Tiempo Real -->
+                <div class="lg:col-span-4 space-y-6">
+                    <div class="bg-obsidian-900 border border-gold-500/10 p-8 rounded-xl text-center shadow-xl">
+                        <h4 class="font-serif text-lg text-stone-300 font-semibold mb-4">Tazas Especiales Disponibles</h4>
+                        <div class="relative inline-block my-4">
+                            <!-- Visual Ring representing daily capacity -->
+                            <div class="w-40 h-40 rounded-full border-4 border-stone-800 flex items-center justify-center">
+                                <div class="text-center">
+                                    <span id="contador-tazas" class="font-serif text-5xl font-bold text-gold-500 transition-all duration-500">50</span>
+                                    <span class="block text-[10px] text-stone-500 tracking-widest uppercase mt-1">De 50 hoy</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-xs text-stone-400 mt-2 leading-relaxed">
+                            Contabiliza métodos V60, Kyoto Drip y Siphon. Límite estricto de un máximo de <strong>2 tazas diarias por persona</strong>.
+                        </p>
+                    </div>
+
+                    <div class="bg-obsidian-900 border border-gold-500/10 p-8 rounded-xl text-center shadow-xl">
+                        <h4 class="font-serif text-lg text-stone-300 font-semibold mb-4">Plazas para Cata Semanal</h4>
+                        <div class="flex items-center justify-center gap-3 my-4">
+                            <span id="contador-cata" class="font-serif text-5xl font-bold text-gold-500 transition-all duration-500">8</span>
+                            <div class="text-left">
+                                <span class="block text-stone-400 text-xs tracking-widest uppercase font-bold">Cupos Restantes</span>
+                                <span class="block text-[10px] text-stone-500 uppercase">Para el ritual del Sábado</span>
+                            </div>
+                        </div>
+                        <p class="text-xs text-stone-400 leading-relaxed">
+                            Sesión grupal reducida con degustación multiproceso de café exótico.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Columna Derecha: El Formulario Dinámico -->
+                <div class="lg:col-span-8 bg-obsidian-900 border border-gold-500/20 p-8 sm:p-10 rounded-xl shadow-xl">
+                    <h3 class="font-serif text-2xl font-bold text-white mb-6">Detalles de la Reserva</h3>
+                    
+                    <form id="reserva-form" class="space-y-6">
+                        <!-- Nombre del Cliente -->
+                        <div>
+                            <label for="cliente-nombre" class="block text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">Tu Nombre Completo</label>
+                            <input type="text" id="cliente-nombre" required placeholder="Ej: Kenzo Tange" 
+                                class="w-full bg-obsidian-950 border border-stone-800 rounded px-4 py-3 text-white placeholder-stone-600 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all">
+                        </div>
+
+                        <!-- Tipo de Reserva -->
+                        <div>
+                            <label for="reserva-tipo" class="block text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">Selecciona el Servicio</label>
+                            <select id="reserva-tipo" required 
+                                class="w-full bg-obsidian-950 border border-stone-800 rounded px-4 py-3 text-stone-300 focus:outline-none focus:border-gold-500 focus:ring-1 focus:ring-gold-500 transition-all cursor-pointer">
+                                <option value="" disabled selected>Elegir opción...</option>
+                                <option value="metodo">Taza de Café Especial (V60 / Kyoto / Siphon)</option>
+                                <option value="cata">Cata Semanal Guiada ($25)</option>
+                            </select>
+                        </div>
+
+                        <!-- Sección de Parámetros de Método (Se muestra de forma condicional) -->
+                        <div id="campos-metodo" class="hidden space-y-6 p-4 bg-obsidian-950 rounded border border-gold-500/5 transition-all duration-300">
+                            <div>
+                                <label for="metodo-tipo" class="block text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">Método Preferido</label>
+                                <select id="metodo-tipo" 
+                                    class="w-full bg-obsidian-900 border border-stone-800 rounded px-4 py-3 text-stone-300 focus:outline-none focus:border-gold-500 transition-all cursor-pointer">
+                                    <option value="V60">V60 ($5.00)</option>
+                                    <option value="Kyoto">Kyoto Drip ($7.00)</option>
+                                    <option value="Siphon">Siphon ($8.00)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="cantidad-tazas" class="block text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">Cantidad de Tazas (Máx. 2 por persona)</label>
+                                <input type="number" id="cantidad-tazas" min="1" max="2" value="1"
+                                    class="w-full bg-obsidian-900 border border-stone-800 rounded px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-all">
+                                <p class="text-[10px] text-stone-500 mt-1.5">* El límite diario de 2 tazas garantiza el disfrute de otros adeptos al café.</p>
+                            </div>
+                        </div>
+
+                        <!-- Sección de Parámetros de Cata (Se muestra de forma condicional) -->
+                        <div id="campos-cata" class="hidden space-y-6 p-4 bg-obsidian-950 rounded border border-gold-500/5 transition-all duration-300">
+                            <div>
+                                <label for="cantidad-personas" class="block text-xs uppercase tracking-widest text-stone-400 font-semibold mb-2">Número de Personas</label>
+                                <input type="number" id="cantidad-personas" min="1" max="8" value="1"
+                                    class="w-full bg-obsidian-900 border border-stone-800 rounded px-4 py-3 text-white focus:outline-none focus:border-gold-500 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Botón Enviar -->
+                        <button type="submit" class="w-full py-4 bg-gold-500 text-obsidian-950 font-bold tracking-widest rounded hover:bg-gold-400 transition-all duration-300 uppercase shadow-lg gold-shimmer">
+                            Agendar Reserva
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- MIS RESERVAS SIMULADOR -->
+            <div id="reserva-list-container" class="mt-16 bg-obsidian-900/40 border border-stone-800 p-8 rounded-xl hidden">
+                <h4 class="font-serif text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-green-500 animate-pulse"></span>
+                    Tus Reservas Activas (Hoy)
+                </h4>
+                <div id="reserva-list" class="space-y-4">
+                    <!-- Dinámicamente poblado -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CUSTOM CUSTOM ALERT DIALOG & TOAST (No Alert rule) -->
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-3 max-w-sm w-full px-4 sm:px-0"></div>
+
+    <!-- FOOTER -->
+    <footer class="bg-obsidian-950 border-t border-stone-900 py-12 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex flex-col items-center md:items-start">
+                <span class="font-serif text-xl tracking-[0.2em] text-gold-500 font-bold">OOKINI</span>
+                <p class="text-stone-500 text-xs mt-1">Gratitud profunda en cada gota.</p>
+            </div>
+            
+            <div class="text-center md:text-right">
+                <p class="text-xs text-stone-400">&copy; 2026 Ookini Café de Especialidad. Desarrollado con absoluto respeto.</p>
+                <p class="text-[10px] text-stone-600 mt-1">Abierto de Martes a Domingo - 08:00 a 20:00. Sin pastelería por convicción aromática.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT LOGIC -->
+    <script>
+        // Core state architecture
+        const state = {
+            tazasDisponibles: 50,
+            cataCuposDisponibles: 8,
+            reservasUsuario: []
+        };
+
+        // DOM elements
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const menuIconPath = document.getElementById('menu-icon-path');
+        const reservaTipo = document.getElementById('reserva-tipo');
+        const camposMetodo = document.getElementById('campos-metodo');
+        const camposCata = document.getElementById('campos-cata');
+        const reservaForm = document.getElementById('reserva-form');
+        const contadorTazas = document.getElementById('contador-tazas');
+        const contadorCata = document.getElementById('contador-cata');
+        const cataDisponibilidadInfo = document.getElementById('cata-disponibilidad-info');
+        const toastContainer = document.getElementById('toast-container');
+        const reservaListContainer = document.getElementById('reserva-list-container');
+        const reservaList = document.getElementById('reserva-list');
+
+        // Mobile Menu Toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            const isHidden = mobileMenu.classList.contains('hidden');
+            if (isHidden) {
+                mobileMenu.classList.remove('hidden');
+                menuIconPath.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            }
+        });
+
+        // Close mobile menu on click a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                menuIconPath.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+            });
+        });
+
+        // Conditional inputs based on selected reservation type
+        reservaTipo.addEventListener('change', (e) => {
+            const value = e.target.value;
+            if (value === 'metodo') {
+                camposMetodo.classList.remove('hidden');
+                camposCata.classList.add('hidden');
+                document.getElementById('cantidad-tazas').setAttribute('required', 'true');
+                document.getElementById('cantidad-personas').removeAttribute('required');
+            } else if (value === 'cata') {
+                camposCata.classList.remove('hidden');
+                camposMetodo.classList.add('hidden');
+                document.getElementById('cantidad-personas').setAttribute('required', 'true');
+                document.getElementById('cantidad-tazas').removeAttribute('required');
+            }
+        });
+
+        // Quick reservation helpers (from card button clicks)
+        function setReservaRapida(tipo, subMetodo = null) {
+            reservaTipo.value = tipo;
+            reservaTipo.dispatchEvent(new Event('change'));
+            
+            if (tipo === 'metodo' && subMetodo) {
+                document.getElementById('metodo-tipo').value = subMetodo;
+            }
+            
+            // Scroll to reservation smoothly
+            const targetSection = document.getElementById('reservas');
+            if (targetSection) {
+                targetSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Custom Toast Notification System (replaces alert/confirm)
+        function showNotification(title, message, type = 'success') {
+            const toast = document.createElement('div');
+            toast.className = `flex flex-col p-4 rounded-lg shadow-2xl border transition-all duration-300 transform translate-y-2 opacity-0 scale-95 ${
+                type === 'success' 
+                    ? 'bg-obsidian-900 border-gold-500/40 text-stone-200' 
+                    : 'bg-red-950/90 border-red-500/40 text-red-100'
+            }`;
+            
+            toast.innerHTML = `
+                <div class="flex items-center justify-between">
+                    <span class="font-serif font-bold tracking-wider text-sm ${type === 'success' ? 'text-gold-500' : 'text-red-400'}">${title}</span>
+                    <button class="text-stone-500 hover:text-stone-300 focus:outline-none ml-4 text-xs font-semibold" onclick="this.parentElement.parentElement.remove()">✕</button>
+                </div>
+                <p class="text-xs text-stone-400 mt-1.5 font-light">${message}</p>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Animate In
+            setTimeout(() => {
+                toast.classList.remove('opacity-0', 'translate-y-2', 'scale-95');
+            }, 10);
+            
+            // Auto Remove after 5 seconds
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2', 'scale-95');
+                setTimeout(() => {
+                    toast.remove();
+                }, 300);
+            }, 5000);
+        }
+
+        // Render updated list of current bookings
+        function renderReservas() {
+            if (state.reservasUsuario.length === 0) {
+                reservaListContainer.classList.add('hidden');
+                return;
+            }
+            
+            reservaListContainer.classList.remove('hidden');
+            reservaList.innerHTML = '';
+            
+            state.reservasUsuario.forEach((res, index) => {
+                const card = document.createElement('div');
+                card.className = 'flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 bg-obsidian-950 border border-stone-800 rounded-lg gap-4';
+                
+                const isMetodo = res.tipo === 'metodo';
+                const label = isMetodo ? `Taza Especial: ${res.metodo}` : 'Cata Semanal Exclusiva';
+                const details = isMetodo ? `${res.cantidad} tazas de café` : `${res.cantidad} personas`;
+                
+                card.innerHTML = `
+                    <div>
+                        <p class="font-serif text-sm font-semibold text-gold-500">${label}</p>
+                        <p class="text-xs text-stone-400 mt-1">Registrado a nombre de: <span class="text-white font-medium">${res.nombre}</span> &middot; ${details}</p>
+                    </div>
+                    <button onclick="cancelarReserva(${index})" class="text-[10px] text-stone-500 hover:text-red-400 border border-stone-800 hover:border-red-500/20 px-3 py-1.5 rounded transition-all">
+                        Anular reserva
+                    </button>
+                `;
+                reservaList.appendChild(card);
+            });
+        }
+
+        // Update DOM Counters
+        function updateCounters() {
+            contadorTazas.textContent = state.tazasDisponibles;
+            contadorCata.textContent = state.cataCuposDisponibles;
+            
+            // Dynamic text indicator in Weekly Tasting banner
+            if (state.cataCuposDisponibles > 0) {
+                cataDisponibilidadInfo.textContent = `(${state.cataCuposDisponibles} cupos libres para Sábado)`;
+                cataDisponibilidadInfo.className = 'flex items-center gap-1.5 text-gold-400/80 font-medium tracking-wide';
+            } else {
+                cataDisponibilidadInfo.textContent = '(Agotado)';
+                cataDisponibilidadInfo.className = 'flex items-center gap-1.5 text-red-500 font-bold';
+            }
+        }
+
+        // Handle Cancel Reservation
+        window.cancelarReserva = function(index) {
+            const reserva = state.reservasUsuario[index];
+            if (reserva.tipo === 'metodo') {
+                state.tazasDisponibles += reserva.cantidad;
+            } else if (reserva.tipo === 'cata') {
+                state.cataCuposDisponibles += reserva.cantidad;
+            }
+            
+            state.reservasUsuario.splice(index, 1);
+            showNotification('Reserva Anulada', 'Tu cupo ha sido liberado correctamente en tiempo real.', 'success');
+            
+            updateCounters();
+            renderReservas();
+        };
+
+        // Handle Form Submission
+        reservaForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const nombre = document.getElementById('cliente-nombre').value.trim();
+            const tipo = reservaTipo.value;
+            
+            if (!tipo) {
+                showNotification('Atención', 'Por favor selecciona el servicio que deseas reservar.', 'error');
+                return;
+            }
+
+            if (tipo === 'metodo') {
+                const metodo = document.getElementById('metodo-tipo').value;
+                const tazas = parseInt(document.getElementById('cantidad-tazas').value);
+                
+                // Rule validation 1: User limits (max 2 cups)
+                if (tazas > 2) {
+                    showNotification('Límite Excedido', 'Nuestra política de culto solo permite reservar un máximo de 2 tazas por persona al día.', 'error');
+                    return;
+                }
+                
+                // Rule validation 2: Global daily capacity (max 50)
+                if (state.tazasDisponibles < tazas) {
+                    showNotification('Cupos Agotados', `Solo nos quedan ${state.tazasDisponibles} tazas disponibles para métodos de filtro hoy.`, 'error');
+                    return;
+                }
+
+                // Process reservation
+                state.tazasDisponibles -= tazas;
+                state.reservasUsuario.push({
+                    tipo: 'metodo',
+                    nombre: nombre,
+                    metodo: metodo,
+                    cantidad: tazas
+                });
+
+                showNotification('Reserva Confirmada', `Tu ritual de café (${tazas}x ${metodo}) se ha agendado con éxito. Te esperamos en el templo del aroma.`, 'success');
+
+            } else if (tipo === 'cata') {
+                const personas = parseInt(document.getElementById('cantidad-personas').value);
+                
+                // Rule validation 3: Tasting event capacity (8 seats limit)
+                if (state.cataCuposDisponibles < personas) {
+                    showNotification('Sin Plazas Suficientes', `Lo sentimos, solo nos quedan ${state.cataCuposDisponibles} cupos libres para la cata semanal.`, 'error');
+                    return;
+                }
+
+                // Process reservation
+                state.cataCuposDisponibles -= personas;
+                state.reservasUsuario.push({
+                    tipo: 'cata',
+                    nombre: nombre,
+                    cantidad: personas
+                });
+
+                showNotification('Cupos Reservados', `Se han guardado ${personas} plazas para la cata guiada exclusiva. En breve recibirás un correo de cortesía.`, 'success');
+            }
+
+            // UI Reset & Updates
+            reservaForm.reset();
+            reservaTipo.value = "";
+            camposMetodo.classList.add('hidden');
+            camposCata.classList.add('hidden');
+            
+            updateCounters();
+            renderReservas();
+        });
+
+        // Initialize display stats
+        window.onload = function() {
+            updateCounters();
+        };
+    </script>
+</body>
+</html>

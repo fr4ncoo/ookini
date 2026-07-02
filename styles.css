@@ -1,0 +1,70 @@
+body {
+    background-color: cornsilk;
+    font-family: Georgia, serif;
+    color: #1A1A1A;
+}
+
+h1 {
+    color: #5b9b8e;
+    font-size: 2.5rem;
+}
+
+header {
+    padding: 1.5rem 2 rem;
+    border-bottom: 1px solid #1A1A1A;
+}
+
+nav a {
+    color:orange;
+}
+
+main {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.metodo-titulo {
+    font-size: 1.1rem;
+    letter-spacing: 0.05rem;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+    color:#5b9b8e
+}
+
+.precio {
+    color: orange;
+}
+
+footer {
+    padding: 1.5rem 2rem;
+    border-top: 1px solid #1A1A1A;
+}
+
+#contador-tazas {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color:#5b9b8e;
+}
+
+#boton-reservar {
+    display:block;
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    background-color: #5b9b8e;
+    color:#f2f0ea;
+    border: none;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    border-radius: 6px;    
+    transition: transform 200ms ease, box-shadow 200ms ease;
+    will-change: transform, box-shadow;
+}
+#boton-reservar:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+
