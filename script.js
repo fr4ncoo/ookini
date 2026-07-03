@@ -18,7 +18,7 @@ const botonReservar = document.getElementById("boton-reservar");
 const contadorTazas = document.getElementById("contador-tazas")
 
 
-botonReservar.addEventListener("dblclick", function() {
+botonReservar.addEventListener("click", function() {
     const tazasActuales = Number(contadorTazas.textContent)
 
 
